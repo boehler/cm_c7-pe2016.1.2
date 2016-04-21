@@ -72,7 +72,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
-    master.vm.provision :shell, path: "provision/development.sh"
+    development.vm.provision :shell, path: "provision/development.sh"
   end
 
 ################
@@ -103,7 +103,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
-    master.vm.provision :shell, path: "provision/testing.sh"
+    testing.vm.provision :shell, path: "provision/testing.sh"
   end
 
 ###################
@@ -134,6 +134,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
-    master.vm.provision :shell, path: "provision/production.sh"
+    production.vm.provision :shell, path: "provision/production.sh"
   end
 end
