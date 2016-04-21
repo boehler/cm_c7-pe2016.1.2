@@ -41,6 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :master
     provisioner.answer_file = 'provision/all-in-one.answers.txt'
   end
+    master.vm.provision :shell, path: "provision/master.sh"
   end
 
 ###################
@@ -71,6 +72,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
+    master.vm.provision :shell, path: "provision/development.sh"
   end
 
 ################
@@ -101,6 +103,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
+    master.vm.provision :shell, path: "provision/testing.sh"
   end
 
 ###################
@@ -131,5 +134,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provisioner.role = :agent
     provisioner.master = 'master.puppetlabs.vm'
   end
+    master.vm.provision :shell, path: "provision/production.sh"
   end
 end
