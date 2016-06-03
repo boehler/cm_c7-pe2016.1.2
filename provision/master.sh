@@ -13,7 +13,7 @@ export PATH=$PATH:/opt/puppetlabs/puppet/bin/
 # Setup the Hiera configuration
   cat > /var/tmp/configure_hiera.pp << 'EOF'
     class { 'hiera':
-      hiera_yaml => '/etc/puppetlabs/code/hiera.yaml',
+      hiera_yaml => '$codedir/hiera.yaml',
       hierarchy  => [
         'nodes/%{clientcert}',
         '%{environment}',
@@ -39,3 +39,12 @@ echo '{"service-url":"https://master.puppetlabs.vm:4433/rbac-api"}' > ~/.puppetl
 
 # Generate Deployment Token
 echo "puppetlabs" | /opt/puppetlabs/bin/puppet-access login --username cmadmin --service-url https://master.puppetlabs.vm:4433/rbac-api --lifetime 180d
+
+# Create SSH Key Location
+mkdir -p /etc/puppetlabs/puppetserver/ssh
+
+# Generate SSH Keys
+/usr/bin/ssh-keygen -t rsa -b 4096 -C "Puppet Vagrant" -f /etc/puppetlabs/puppetserver/ssh -P ""
+
+# Set Permissions on keys
+chown -R pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh
