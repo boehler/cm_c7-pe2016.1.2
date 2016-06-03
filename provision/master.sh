@@ -44,7 +44,7 @@ echo "puppetlabs" | /opt/puppetlabs/bin/puppet-access login --username cmadmin -
 mkdir -p /etc/puppetlabs/puppetserver/ssh
 
 # Generate SSH Keys
-/usr/bin/ssh-keygen -t rsa -b 4096 -C "Puppet Vagrant" -f /etc/puppetlabs/puppetserver/ssh -P ""
+/usr/bin/ssh-keygen -t rsa -b 4096 -C "Puppet Vagrant" -f /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa -P ""
 
 # Set Permissions on keys
 chown -R pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh
