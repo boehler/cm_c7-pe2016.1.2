@@ -27,6 +27,19 @@ EOF
 # Configure Hiera
 /opt/puppetlabs/puppet/bin/puppet apply /var/tmp/configure_hiera.pp
 
+# Configure Puppet to point to hiera.yaml
+/opt/puppetlabs/puppet/bin/puppet module install 'puppetlabs-inifile'
+
+cat > /var/tmp/configure_puppet.pp << 'EOF'
+  ini_setting { 'configure puppet':
+    ensure  => 'present',
+    path    => '/etc/puppetlabs/puppet/puppet.conf',
+    section => 'main',
+    setting => 'hiera_config',
+    value   => '$confdir/hiera.yaml',
+  }
+EOF
+
 # Create Code manager Deploy Role
 curl -k -X POST -H 'Content-Type: application/json' https://master.puppetlabs.vm:4433/rbac-api/v1/roles -d '{"permissions": [{"object_type": "environment", "action": "deploy_code", "instance": "*"}, {"object_type": "tokens", "action": "override_lifetime", "instance": "*"}],"user_ids": [], "group_ids": [], "display_name": "CM Admin", "description": ""}' --cert /etc/puppetlabs/puppet/ssl/certs/master.puppetlabs.vm.pem --key /etc/puppetlabs/puppet/ssl/private_keys/master.puppetlabs.vm.pem --cacert /etc/puppetlabs/puppet/ssl/certs/ca.pem
 
