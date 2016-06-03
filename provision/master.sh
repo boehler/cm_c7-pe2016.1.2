@@ -13,7 +13,7 @@ export PATH=$PATH:/opt/puppetlabs/puppet/bin/
 # Setup the Hiera configuration
   cat > /var/tmp/configure_hiera.pp << 'EOF'
     class { 'hiera':
-      hiera_yaml => '$codedir/hiera.yaml',
+      hiera_yaml => '$confdir/hiera.yaml',
       hierarchy  => [
         'nodes/%{clientcert}',
         '%{environment}',

@@ -90,7 +90,7 @@ q_puppetmaster_r10k_remote='https://github.com/cvquesty/control_repo.git'
 # This must be specified in conjunction with q_puppetmaster_r10k_remote
 # to be populated in the configuration file. This will enable rugged
 # support in r10k allowing you to use on systems without git installed.
-#q_puppetmaster_r10k_private_key=/root/.ssh/id_dsa
+q_puppetmaster_r10k_private_key=/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa
 
 # Y or N - Whether or not the file sync service should be enabled on the master
 # node. This is an optional parameter. If not supplied, the file sync service
