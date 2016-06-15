@@ -13,7 +13,7 @@ export PATH=$PATH:/opt/puppetlabs/puppet/bin/
 # Setup the Hiera configuration
   cat > /var/tmp/configure_hiera.pp << 'EOF'
     class { 'hiera':
-      hiera_yaml => '$confdir/hiera.yaml',
+      hiera_yaml => '/etc/puppetlabs/puppet/hiera.yaml',
       hierarchy  => [
         'nodes/%{clientcert}',
         '%{environment}',
@@ -61,3 +61,6 @@ mkdir -p /etc/puppetlabs/puppetserver/ssh
 
 # Set Permissions on keys
 chown -R pe-puppet:pe-puppet /etc/puppetlabs/puppetserver/ssh
+
+# Add Important Packages
+/usr/bin/yum -y install git
